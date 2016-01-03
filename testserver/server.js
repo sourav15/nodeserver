@@ -1,6 +1,9 @@
 var express = require('express');
 require('express-namespace');
+bodyParser = require("body-parser");
+var app;
 app = module.exports = express();
+app.use(bodyParser.json());
 
 require('./routes/routes')(app);
 
