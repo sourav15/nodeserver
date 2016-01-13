@@ -48,14 +48,6 @@ module.exports = {
                                 callback(JSON.stringify({status: "failed", message: err}));
                        }
                     });
-                   },
-
-              setorder: function(incoming, callback){
-
-                        function setordermysql(callback){
-                        var params, query;
-                        query = "";
-                        }
-                    }   
+                   }        
                  };
 

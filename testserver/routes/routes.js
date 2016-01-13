@@ -26,9 +26,17 @@ module.exports = function(app) {
    app.get('/place', function(req, res){
        var placehelper = require('../helpers/place');
        placehelper.getplaces(req, function(response){
-       res.header("Access-Control_Allow-Origin", "*");
+       res.header("Access-Control-Allow-Origin", "*");
        return res.send(response);
      });
      });
+
+   app.post('/order', function(req, res){
+       var orderhelper = require('../helpers/order');
+       orderhelper.setorder(req.body, function(response){
+       res.header("Access-Control-Allow-Origin", "*");
+       return res.send(response);
+       });
+       });
    });
 };

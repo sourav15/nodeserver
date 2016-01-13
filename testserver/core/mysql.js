@@ -20,9 +20,9 @@ module.exports = {
 
                       console.log('connected as id ' + connection.threadId);
 
-                     connection.query(query, params, function(err, rows){
+                     connection.query(query, params, function(err, res){
                      connection.release();
-                                callback(err, rows);
+                                callback(err, res);
                       });
 
                      connection.on('error', function(err) {
