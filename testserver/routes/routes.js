@@ -1,6 +1,15 @@
 
 module.exports = function(app) {
     app.namespace('/api/public',function(){
+
+    app.post('/register',function(req, res){
+        var userhelper = require('../helpers/user');
+        userhelper.userregister(req.body, function(response){
+        res.header("Access-Control-Allow-Origin", "*");
+        return res.send(response);
+    });
+    });
+
     app.post('/menu', function(req, res){
         var placehelper = require('../helpers/place');
         placehelper.getmenu(req.body, function(response){

@@ -1,9 +1,12 @@
 var express = require('express');
 require('express-namespace');
 bodyParser = require("body-parser");
+cors = require('cors');
+
 var app;
 app = module.exports = express();
 app.use(bodyParser.json());
+app.use(cors());
 
 require('./routes/routes')(app);
 
