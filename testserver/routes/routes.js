@@ -10,6 +10,14 @@ module.exports = function(app) {
     });
     });
 
+    app.post('/login', function(req, res){
+        var userhelper = require('../helpers/user');
+        userhelper.userlogin(req.body, function(response){
+        res.header("Access-Control-Allow-Origin", "*");
+        return res.send(response);
+    });
+    });
+
     app.post('/menu', function(req, res){
         var placehelper = require('../helpers/place');
         placehelper.getmenu(req.body, function(response){

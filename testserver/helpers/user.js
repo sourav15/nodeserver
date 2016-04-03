@@ -38,5 +38,43 @@ module.exports = {
                              }
                              });
 
-              }  
-}
+              }, 
+
+              userlogin : function(incoming, callback) {
+                          
+                          function validateincoming(callback) {
+                             if(!incoming || !incoming.username || incoming.username === '' ||
+                                !incoming.password || incoming.password === '') {
+                                callback('Missing important data');
+                             } else {
+                               callback(null);
+                             } 
+                          }
+
+                          function checkuser(callback) {
+                             var params, query;
+                             params = [incoming.username, incoming.password];
+                             query = "SELECT id from users where username = ? AND password = ?";
+                             mysql.query(query, params, function(err, res){
+                             if(!err && (res != null)) {
+                                var rowlength = res.length;
+                                if(rowlength > 0) {
+                                   callback(null);
+                                } else {
+                                   callback("No User Found");   
+                                }
+                             } else {
+                                callback(err);
+                             } 
+                             });
+                          }
+
+                          async.waterfall([validateincoming, checkuser], function(err){
+                          if(!err) {
+                             callback(JSON.stringify({"status": "success"}));
+                          } else {
+                             callback(JSON.stringify({"status": "failed", "message": err}));
+                          }
+                          });
+              } 
+};
